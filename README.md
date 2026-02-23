@@ -7,7 +7,7 @@ TecX (Technology Engineering Computation Expanding ) Language Model
 # Project: TecX-LLM (v1.0)
 A Domain-Specific Large Language Model for Harmonic Resonance & Electromagnetic Physics.
 # Executive Summary
-Resonance-LLM is a specialized generative model trained from scratch to master the complexities of scientific constants, specifically vacuum permittivity (
+TecX-LLM is a specialized generative model trained from scratch to master the complexities of scientific constants, specifically vacuum permittivity (
 ) and harmonic oscillators. Unlike general-purpose models, Resonance-LLM utilizes a custom-trained scientific tokenizer and a curated "Gold-Standard" dataset to achieve 98% accuracy in physics-based formula generation.
 # Technical Architecture
 1. Data Pipeline (Automated & AI-Judged)
