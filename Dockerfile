@@ -21,4 +21,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 EXPOSE 7860
 
 # 7. Command to start your Science LLM Web UI
-CMD ["python3", "tecx_web_ui.py"]
+CMD ["python3", "tecx_Chat_Web-UI.py"]
