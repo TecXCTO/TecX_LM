@@ -1,0 +1,18 @@
+Architecture: The Resonance Transformer
+
+Our model uses a Decoder-Only Transformer architecture optimized for scientific logic.
+Rotary Positional Embeddings (RoPE): Better handles long-form mathematical proofs.
+FlashAttention-3: Hard-coded for H100/B300 memory speed.
+Custom BPE Tokenizer: 32k vocabulary size. It treats 8.854e-12 as a single semantic unit, preventing "math drift" during inference.
+
+The Data Pipeline "Gold Standard"
+We do not use raw web scrapes. Our data undergoes a Triple-Filter Process:
+Language Filter: Removes non-English scientific text.
+Complexity Filter: Discards text below a collegiate physics level.
+LLM-Judge: A Llama-3-70B model scores every paragraph for "Scientific Integrity." Only scores > 0.85 are included in the pre-training set.
+
+Hardware Requirements for Training
+Component	Minimum (Inference)	Recommended (Fine-tuning)
+GPU	RTX 3090 / 4090	RTX 6000 Ada / B300
+VRAM	12GB (Quantized)	48GB+ (Full Precision)
+Interconnect	PCIe Gen 4	NVLink 6
