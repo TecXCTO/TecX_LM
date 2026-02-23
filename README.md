@@ -37,3 +37,40 @@ Formula Accuracy	82%	97.8%
 Token Efficiency	Baseline	1.3x Faster
 Scientific Hallucination	Frequent	Minimal (Domain Locked)
 ```
+# TecX-LLM Repository Structure
+```
+Resonance-LLM/
+├── .github/
+│   └── workflows/
+│       └── ai-triage.yml             # AI-powered Issue Labeler
+├── data/
+│   ├── raw/                         # Initial scrapes
+│   ├── processed/                   # Gold-Standard JSONL files
+│   └── scripts/
+│       ├── scraper.py               # Web scraping (Crawl4AI)
+│       ├── filter_judge.py          # LLM-as-a-Judge script
+│       └── build_tokenizer.py       # Custom Science BPE trainer
+├── model/
+│   ├── checkpoints/                 # Saved .pth weights
+│   ├── src/
+│   │   ├── architecture.py          # PyTorch Transformer Block
+│   │   ├── training_loop.py         # Pre-training logic
+│   │   └── sft_trainer.py           # Chat Assistant fine-tuning
+│   └── science_tokenizer.json       # Exported vocabulary
+├── deployment/
+│   ├── docker-compose.yml           # Multi-container orchestration
+│   ├── Dockerfile                   # NVIDIA CUDA 12.6 image
+│   ├── prometheus.yml               # Monitoring configuration
+│   └── science_web_ui.py            # Gradio Web Interface
+├── logs/
+│   └── log_analyzer.py              # Blackwell B300 anomaly detector
+├── docs/
+│   ├── README.md                    # Technical Project Overview
+│   ├── USER_GUIDE.md                # Quick Start instructions
+│   ├── SUPPORT.md                   # Enterprise SLA tiers
+│   └── whitepaper.pdf               # Scientific Abstract
+├── index.html                       # 2026 Product Launch Site
+├── LICENSE                          # Apache 2.0
+└── requirements.txt                 # Python dependencies
+
+```
