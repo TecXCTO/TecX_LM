@@ -1,4 +1,4 @@
-Architecture: The Resonance Transformer
+Architecture: The TecX LM Transformer
 
 Our model uses a Decoder-Only Transformer architecture optimized for scientific logic.
 Rotary Positional Embeddings (RoPE): Better handles long-form mathematical proofs.
