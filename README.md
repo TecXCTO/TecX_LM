@@ -1,5 +1,8 @@
 # TecX_LM
 TecX (Technology Engineering Computation Expanding ) Language Model
+
+# Technical Project Specification for the repository.
+
 ```
 # Project: TecX-LLM (v1.0)
 A Domain-Specific Large Language Model for Harmonic Resonance & Electromagnetic Physics.
