@@ -1,0 +1,7 @@
+# Exclude heavy weights and local logs
+model/checkpoints/*.pth
+data/raw/*
+data/processed/*.jsonl
+*.log
+.env
+__pycache__/
