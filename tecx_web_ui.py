@@ -1,4 +1,12 @@
+import gradio as gr
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+import torch
 from transformers import BitsAndBytesConfig
+
+# 1. Load your Final Assistant Model and Tokenizer
+model_path = "./tecx_assistant_final"
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+
 
 # 2026 Best-Practice Quantization Config
 quant_config = BitsAndBytesConfig(
@@ -9,24 +17,18 @@ quant_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "./tecx_assistant_final",
+    model_path,
     quantization_config=quant_config,
     device_map="auto"
 )
 
-import gradio as gr
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
-import torch
-
-# 1. Load your Final Assistant Model and Tokenizer
-model_path = "./tecx_assistant_final"
-tokenizer = AutoTokenizer.from_pretrained(model_path)
+'''
 model = AutoModelForCausalLM.from_pretrained(
     model_path, 
     torch_dtype=torch.bfloat16, # Fast 2026 precision for RTX/H100
     device_map="auto"           # Automatically uses your best GPU
 )
-
+'''
 # 2. Create the Generation Pipeline
 # Temperature 0.3 makes the model more factual/scientific (less creative)
 generator = pipeline(
