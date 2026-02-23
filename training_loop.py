@@ -1,4 +1,20 @@
+import torch
+import time
+import os
 from prometheus_client import start_http_server, Gauge
+
+
+
+
+# --- Training Configuration ---
+learning_rate = 3e-4    # How fast the model learns. Smaller is more stable for Science.
+max_iters = 10000       # Total training steps
+eval_interval = 500     # How often to check accuracy on "Validation Data"
+eval_iters = 200        # How many batches to use for validation check
+save_dir = "checkpoints"
+os.makedirs(save_dir, exist_ok=True)
+
+
 
 # Define your 2026 Science Metrics
 TRAINING_LOSS = Gauge('tecx_loss', 'Current Training Loss')
@@ -24,21 +40,10 @@ start_http_server(8000)
 
 
 
-import torch
-import time
-import os
-
-# --- Training Configuration ---
-learning_rate = 3e-4    # How fast the model learns. Smaller is more stable for Science.
-max_iters = 10000       # Total training steps
-eval_interval = 500     # How often to check accuracy on "Validation Data"
-eval_iters = 200        # How many batches to use for validation check
-save_dir = "checkpoints"
-os.makedirs(save_dir, exist_ok=True)
 
 # 1. Initialize Model & Optimizer
-# (Assumes your ResonanceLLM class is imported)
-model = ResonanceLLM(vocab_size=32000).to(device)
+# (Assumes your TecXLLM class is imported)
+model = TecXLLM(vocab_size=32000).to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
 # 2. Setup Data Loading (Simplified for your Science JSONL)
@@ -71,7 +76,7 @@ for iter in range(max_iters):
         print(f"Step {iter}: Val Loss {out_loss:.4f} | Time: {time.time() - start_time:.2f}s")
         
         # Save a checkpoint of your "Resonance" Model
-        torch.save(model.state_dict(), f"{save_dir}/resonance_step_{iter}.pth")
+        torch.save(model.state_dict(), f"{save_dir}/tecx_step_{iter}.pth")
         model.train()
 
     # --- Core Backpropagation Step ---
