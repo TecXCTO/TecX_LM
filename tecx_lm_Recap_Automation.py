@@ -1,7 +1,7 @@
 import os
 import requests
 from datetime import datetime, timedelta
-import ollama # Or your Resonance-LLM endpoint
+import ollama # Or The TecX-LLM endpoint
 
 # --- Configuration ---
 GITHUB_REPO = "TecXCTO/TecX_LM"
@@ -18,11 +18,11 @@ def get_monthly_updates():
     return response.json()
 
 def generate_newsletter(data):
-    """Uses Resonance-LLM to summarize the scientific progress."""
+    """Uses TecX-LLM to summarize the scientific progress."""
     summary_text = "\n".join([f"- {item['title']}: {item['body'][:200]}" for item in data])
     
     prompt = f"""
-    You are the lead editor for the 'Resonance-AI' Monthly Newsletter.
+    You are the lead editor for the 'TecX-AI' Monthly Newsletter.
     Based on the following GitHub updates, write a professional report for physicists and AI engineers.
     
     Focus on:
@@ -34,8 +34,8 @@ def generate_newsletter(data):
     {summary_text}
     """
     
-    # Use your local Resonance model to write its own update!
-    response = ollama.generate(model='resonance-llm', prompt=prompt)
+    # Using the TecX model to write its own update!
+    response = ollama.generate(model='tecx-llm', prompt=prompt)
     return response['response']
 
 # --- Execution ---
@@ -43,7 +43,7 @@ updates = get_monthly_updates()
 newsletter_content = generate_newsletter(updates)
 
 with open(NEWSLETTER_FILE, "w") as f:
-    f.write(f"# 🔬 Resonance-AI: Monthly Progress Report (Feb 2026)\n\n")
+    f.write(f"# 🔬 TecX-AI: Monthly Progress Report (Feb 2026)\n\n")
     f.write(newsletter_content)
 
 print(f"✅ Newsletter generated: {NEWSLETTER_FILE}")
