@@ -4,8 +4,8 @@ from peft import LoraConfig
 import torch
 
 # 1. Load your Pre-trained Model and Custom Tokenizer
-model_path = "./checkpoints/resonance_final_model" 
-tokenizer = AutoTokenizer.from_file("science_tokenizer.json")
+model_path = "../checkpoints/tecx_final_model" 
+tokenizer = AutoTokenizer.from_file("../science_tokenizer.json")
 tokenizer.pad_token = tokenizer.eos_token # Essential for batching
 
 # 2. Configure LoRA (Saves 70% VRAM)
@@ -35,7 +35,7 @@ training_args = TrainingArguments(
 # 4. Initialize the SFT Trainer
 trainer = SFTTrainer(
     model=model_path,
-    train_dataset="science_instructions.jsonl", # Your User/Assistant pairs
+    train_dataset="../science_instructions.jsonl", # Your User/Assistant pairs
     dataset_text_field="text", # The field in your JSONL
     max_seq_length=2048,
     tokenizer=tokenizer,
@@ -48,5 +48,5 @@ print("🤖 Converting Science Model to Assistant...")
 trainer.train()
 
 # 6. Save the final Chat Model
-trainer.save_model("./science_assistant_final")
+trainer.save_model("./tecx_assistant_final")
 print("✅ Your Science Assistant is ready!")
