@@ -3,7 +3,7 @@ import torch
 from PIL import Image
 
 # 1. Load the Multi-Modal Resonance Engine
-model_id = "resonance-ai/vision-v2"
+model_id = "tecx-ai/vision-v2"
 processor = AutoProcessor.from_pretrained(model_id)
 model = LlavaForConditionalGeneration.from_pretrained(
     model_id, 
