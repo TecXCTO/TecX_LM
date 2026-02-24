@@ -7,12 +7,12 @@ learning_rate = 3e-4    # How fast the model learns. Smaller is more stable for 
 max_iters = 10000       # Total training steps
 eval_interval = 500     # How often to check accuracy on "Validation Data"
 eval_iters = 200        # How many batches to use for validation check
-save_dir = "checkpoints"
+save_dir = "../checkpoints"
 os.makedirs(save_dir, exist_ok=True)
 
 # 1. Initialize Model & Optimizer
-# (Assumes your ResonanceLLM class is imported)
-model = ResonanceLLM(vocab_size=32000).to(device)
+# (Assumes your TecXLLM class is imported)
+model = TecXLLM(vocab_size=32000).to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
 # 2. Setup Data Loading (Simplified for your Science JSONL)
@@ -55,4 +55,4 @@ for iter in range(max_iters):
     loss.backward()
     optimizer.step()
 
-print("✅ Training Complete! Model saved in /checkpoints.")
+print("✅ Training Complete! Model saved in model/checkpoints.")
