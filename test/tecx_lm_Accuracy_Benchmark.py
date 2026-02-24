@@ -31,6 +31,6 @@ def run_benchmark(model_name, pipeline):
     return accuracy_score, tokens_per_sec
 
 # --- Investor Demo Logic ---
-# Compare your 'Resonance-LLM' (Fine-tuned) vs 'Base-Model' (General)
-# results_resonance = run_benchmark("Resonance-LLM", resonance_pipeline)
+# Compare your 'TecX-LLM' (Fine-tuned) vs 'Base-Model' (General)
+# results_tecx = run_benchmark("TecX-LLM", tecx_pipeline)
 # results_general = run_benchmark("General-LLM", general_pipeline)
