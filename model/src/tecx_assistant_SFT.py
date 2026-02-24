@@ -21,7 +21,7 @@ peft_config = LoraConfig(
 
 # 3. Setup Training Arguments for 2026
 training_args = TrainingArguments(
-    output_dir="./science_assistant_v1",
+    output_dir="../tecx_assistant_v1",
     per_device_train_batch_size=4,
     gradient_accumulation_steps=4, # Simulates a larger batch size
     learning_rate=2e-4,
@@ -48,5 +48,5 @@ print("🤖 Converting Science Model to Assistant...")
 trainer.train()
 
 # 6. Save the final Chat Model
-trainer.save_model("./tecx_assistant_final")
+trainer.save_model("../tecx_assistant_final")
 print("✅ Your Science Assistant is ready!")
