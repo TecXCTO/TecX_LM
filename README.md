@@ -74,3 +74,79 @@ Resonance-LLM/
 └── requirements.txt                 # Python dependencies
 
 ```
+# Branches
+
+This is a practical, “real‑world” branching strategy. It blends the proven Git‑Flow pattern with the lightweight GitHub‑Flow ideas, so you’ll have clear responsibilities for each branch while keeping the history readable.
+
+```
+Branch type     	        Purpose	Typical name	                    When to create	When to delete
+main (or master)	        Production‑ready code that is always deployable.	main	Start of the repo	Never delete
+develop	                  Integration hub for all features that are ready to be tested together.	develop	Start of the repo	Never delete
+feature/*	                A single new feature or change, isolated from other work.	feature/awesome-login, feature/ui‑refactor	As soon as you start the feature	Merge into develop → delete
+release/*	                Stabilisation phase for a specific release version.	release/v2.1.0	When you’re ready to freeze a set of features for a release	Merge into main + develop → delete
+hotfix/*	                Urgent production bug fixes that need to skip the usual feature pipeline.	hotfix/critical‑panic	When a critical bug is found in main	Merge into main + develop → delete
+bugfix/*(optional)	      Minor bug fixes that don’t need a full hotfix process.	bugfix/correct‑api‑doc	When you start a bug‑fix	Merge into develop → delete
+experiment/*(optional)  	Short‑lived experiments, proofs‑of‑concept, or “try‑outs.”	experiment/machine‑learning‑prototype	When you want to try something risky	Merge or delete when finished
+test/* (optional)	        Integration or automated test suites that run against a staging environment.	test/integration‑suite	When you need a dedicated test environment	Merge into develop → delete
+
+```
+How many branches do you actually keep open at once?
+Usually you’ll have one of each type in active development (e.g. one develop, one release, a handful of feature/*). The rest are created on‑demand and deleted when finished. This keeps the repo clean and lets anyone see at a glance what the current state is.
+
+```
+Naming                           Conventions
+Prefix	                        What it denotes	Example
+
+feature/	                      New feature, big or small	feature/user‑profile
+bugfix/	                        Minor bug, non‑critical	bugfix/ui‑alignment
+hotfix/	                        Production critical fix	hotfix/2025‑09‑security‑patch
+release/	                      Version‑specific release branch	release/v3.0.0
+experiment/	                    Proof‑of‑concept or experimental branch	experiment/async‑processing
+```
+Always keep the slash : to avoid collisions and to make git branch output easy to read.
+
+Workflow Example
+
+```
+# 1.  Start a new feature
+git checkout -b feature/user-auth
+# develop feature code
+git add .
+git commit -m "Add user authentication flow"
+
+# 2.  Push to remote, create PR into develop
+git push origin feature/user-auth
+# (Create Pull Request on GitHub: feature/user-auth → develop)
+
+# 3.  After merge into develop, delete the feature branch
+git branch -d feature/user-auth
+git push origin --delete feature/user-auth
+
+# 4.  When you’re ready for a release
+git checkout -b release/v1.2.0 develop
+# Run final tests, fix bugs, bump version numbers, etc.
+
+# 5.  Merge release into main and develop
+git checkout main
+git merge --no-ff release/v1.2.0
+git checkout develop
+git merge --no-ff release/v1.2.0
+# Tag the release
+git tag -a v1.2.0 -m "Release v1.2.0"
+git push --tags
+
+# 6.  Delete release branch
+git branch -d release/v1.2.0
+git push origin --delete release/v1.2.0
+```
+
+Branching Strategy Choice
+
+```
+     Situation	                                          Recommended Strategy
+
+Small, agile teams	                   GitHub‑Flow: main + feature branches only. Deploy frequently.
+Multiple simultaneous features	       Git‑Flow: develop + feature + release + hotfix.
+Enterprise / regulated codebase	       Git‑Flow + strict review & CI gates.
+Large monorepo	                       Feature branches + develop + release for each component or module.
+```
