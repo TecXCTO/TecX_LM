@@ -249,3 +249,26 @@ git push origin --delete hotfix/critical-patch
 Why --no-ff?
 It preserves the branch history in the commit graph, making it clear that a feature/release/hotfix was merged.
 
+
+
+ Optional: Pull‑request (PR) workflow
+Feature → develop – open a PR, let the CI run, get reviewers, merge with “Rebase and merge” or “Squash and merge” (as per your policy).
+Release → main & develop – open a PR from the release branch to both main and develop. After merging into main, you’ll have a tagged release; after merging into develop, the changes flow back to the integration branch.
+Hotfix → main & develop – same as release, but start from main.
+9. Summary cheat‑sheet
+Branch	Purpose	Typical name	Where to merge	After merge
+main	Production	main	develop (release)	Tag release
+develop	Integration	develop	feature/*, bugfix/*	N/A
+feature/*	New feature	feature/xyz	develop	Delete
+release/*	Release prep	release/vX.Y.Z	main + develop	Tag & delete
+hotfix/*	Urgent prod fix	hotfix/critical	main + develop	Tag & delete
+bugfix/* (optional)	Minor bug	bugfix/abc	develop	Delete
+experiment/* (optional)	Proof‑of‑concept	experiment/foo	N/A	Delete
+Final words
+Keep your branching discipline – create a branch once you start a task; delete it right after you finish and merge.
+Automate the hard part – let CI run on develop (integration) and main (production).
+Review first – open PRs, add labels (e.g., feature, bugfix, release, hotfix), and enforce approvals.
+Document the flow – add a CONTRIBUTING.md that describes the branching model and merge policy.
+With the above script you now have a fully‑working, Git‑Flow‑style repository ready for production‑grade collaboration. Happy coding!
+
+
