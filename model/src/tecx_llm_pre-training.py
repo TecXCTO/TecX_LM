@@ -11,7 +11,7 @@ n_layer = 12           # Total Transformer layers
 dropout = 0.1          # Prevents overfitting to your specific science books
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-# 1. The Attention Mechanism (The "Resonance" Detector)
+# 1. The Attention Mechanism (The "TecX" Detector)
 class Head(nn.Module):
     def __init__(self, head_size):
         super().__init__()
